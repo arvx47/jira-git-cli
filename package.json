@@ -1,0 +1,52 @@
+{
+  "name": "jira-git-cli",
+  "version": "1.0.0",
+  "description": "Automate Git branch creation and commits from Jira tickets",
+  "keywords": [
+    "jira",
+    "git",
+    "cli",
+    "branch",
+    "commit",
+    "workflow",
+    "automation",
+    "atlassian"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/jira-git-cli"
+  },
+  "type": "module",
+  "bin": {
+    "jg": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "dev": "tsup src/index.ts --format esm --watch",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "conf": "^13.1.0",
+    "inquirer": "^12.4.2",
+    "ora": "^8.2.0",
+    "simple-git": "^3.27.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "tsup": "^8.4.0",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
