@@ -54,7 +54,7 @@ export async function commitCommand(message?: string) {
     message = userMessage;
   }
 
-  const fullMessage = `${ticketKey}: ${message}`;
+  const fullMessage = `[${ticketKey}] ${message}`;
   const hash = await commitAll(fullMessage);
 
   if (hash) {
