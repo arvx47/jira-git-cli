@@ -12,7 +12,10 @@ import {
 } from "../lib/git.js";
 import { buildBranchName } from "../lib/utils.js";
 
-export async function startCommand(ticketKey?: string) {
+export async function startCommand(
+  ticketKey: string | undefined,
+  options: { long?: boolean },
+) {
   const config = validateConfig();
 
   if (!(await isGitRepo())) {
@@ -71,7 +74,7 @@ export async function startCommand(ticketKey?: string) {
   spinner.stop();
 
   // Build branch name
-  const branchName = buildBranchName(ticketKey, summary);
+  const branchName = buildBranchName(ticketKey, "feature", options.long ? summary : undefined);
 
   console.log();
   console.log(`${chalk.bold("Ticket:")}  ${chalk.green(ticketKey)} — ${summary}`);

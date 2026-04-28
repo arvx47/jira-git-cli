@@ -31,6 +31,7 @@ program
   .description(
     "Create a branch from a Jira ticket (interactive picker if no ticket given)",
   )
+  .option("--long", "Include ticket summary in branch name")
   .action(startCommand);
 
 program
