@@ -47,18 +47,22 @@ export async function checkout(name: string): Promise<void> {
   await git().checkout(name);
 }
 
-/**
- * Stage all changes, commit with message.
- */
 export async function commitAll(message: string): Promise<string> {
   await git().add("-A");
   const result = await git().commit(message);
   return result.commit;
 }
 
-/**
- * Check if there are staged or unstaged changes.
- */
+export async function commitStaged(message: string): Promise<string> {
+  const result = await git().commit(message);
+  return result.commit;
+}
+
+export async function hasStagedChanges(): Promise<boolean> {
+  const status = await git().status();
+  return status.staged.length > 0;
+}
+
 export async function hasChanges(): Promise<boolean> {
   const status = await git().status();
   return !status.isClean();

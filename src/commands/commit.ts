@@ -6,8 +6,8 @@ import {
   isGitRepo,
   currentBranch,
   extractTicketFromBranch,
-  commitAll,
-  hasChanges,
+  commitStaged,
+  hasStagedChanges,
 } from "../lib/git.js";
 
 export async function commitCommand(message?: string) {
@@ -25,8 +25,8 @@ export async function commitCommand(message?: string) {
     process.exit(1);
   }
 
-  if (!(await hasChanges())) {
-    console.log(chalk.yellow("No changes to commit."));
+  if (!(await hasStagedChanges())) {
+    console.log(chalk.yellow("No staged changes to commit."));
     return;
   }
 
@@ -55,7 +55,7 @@ export async function commitCommand(message?: string) {
   }
 
   const fullMessage = `[${ticketKey}] ${message}`;
-  const hash = await commitAll(fullMessage);
+  const hash = await commitStaged(fullMessage);
 
   if (hash) {
     console.log(chalk.green(`✓ Committed: ${fullMessage}`));
